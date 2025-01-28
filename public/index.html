@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index dentro de public</title>
+</head>
+
+<body>
+    <h1>Producto</h1>
+    <hr>
+    <button id="cogerProducto">Obtener Producto</button>
+    <table id="tablaProducto" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Marca</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Generado dinamicamente-->
+        </tbody>
+    </table>
+</body>
+<script>
+    document.getElementById("cogerProducto")
+        .addEventListener("click",
+            () => {
+                fetch("/items")
+                    .then(response => response.json())
+                    .then(data => {
+                        const table =
+                            document.getElementById("tablaProducto");
+                        const tbody = table.querySelector("tbody");
+                        tbody.innerHTML = ''//Clear the table
+                        for (producto of data) {
+                            const fila = document.createElement("tr");
+                            fila.innerHTML = `<td>${producto._id}</td><td>${producto.marca+' '}</td><td>${producto.precio}</td>`
+                            tbody.appendChild(fila);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error))
+            }
+        )
+</script>
+
+</html>
