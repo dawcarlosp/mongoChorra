@@ -1,0 +1,53 @@
+body{
+    background: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+button{
+    background: black;
+    color: white;
+}
+button:hover{
+    background: white;
+    color: black;
+    transform: scale(1.5);
+}
+table{
+    border-collapse: collapse;
+    animation: ani 4s infinite;
+}
+th{
+    background: white;
+    color: black;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+@keyframes ani {
+    0%{
+        opacity: 75%;
+        width: 90%;
+        font-size: large;
+        margin-top: 100px;
+    }
+    50%{
+        opacity: 50%;
+        width: 89%;
+        font-size: larger;
+        margin-bottom: 100px;
+    }
+    75%{
+        opacity: 25%;
+        width: 88%;
+        font-size: medium;
+        margin-top: 100px;
+    }
+    100%{
+        opacity: 50%;
+        width: 87%;
+        font-size: small;
+        margin-bottom: 100px;
+    }
+}

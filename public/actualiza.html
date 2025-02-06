@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Lista ordenadores</h1>
+    <select name="" id="seleccionaOrdenador">Ordenadores;</select>
+    <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca">
+        <label for="marca">Precio:</label>
+        <input type="number" id="precio" name="precio">
+        <button id="btnInsertar">Actualizar</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("/items")
+                .then(response => response.json())
+                .then(data => {
+                    let select = document.getElementById("seleccionaOrdenador");
+                    for (ordenador of data) {
+                        let option = document.createElement("option");
+                        option.value = ordenador._id;
+                        option.textContent = ordenador.marca;
+                        select.appendChild(option);
+                    }
+                })
+                .catch(error => console.error('Error:', error))
+        })
+        const traeOrdenador = () =>{
+            id = document.getElementById("seleccionaOrdenador").value;
+            fetch('/items/' + id)
+            .then(response => response.json())
+            .then(ordenador =>{
+                document.getElementById("marca").value = ordenador.marca;
+                document.getElementById("precio").value = ordenador.precio;
+
+            })
+        }
+        document.getElementById("seleccionaOrdenador").addEventListener("change",traeOrdenador);
+        /*
+        let options = document.getElementsByTagName("option");
+        Array.from(options).forEach( opcion => {
+            opcion.addEventListener("click", ()=>{
+                alert("H")
+            })
+        });
+        */
+    </script>
+</body>
+
+</html>
